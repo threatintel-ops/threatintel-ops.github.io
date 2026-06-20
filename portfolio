@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Muhammad Saad Naseer Chaudhary | SOC Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0e17;
+      --surface:  #111827;
+      --border:   #1e2d45;
+      --blue:     #3b82f6;
+      --cyan:     #06b6d4;
+      --green:    #10b981;
+      --red:      #ef4444;
+      --yellow:   #f59e0b;
+      --text:     #e2e8f0;
+      --muted:    #64748b;
+      --mono:     'Share Tech Mono', monospace;
+      --sans:     'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---------- SCANLINE OVERLAY ---------- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ---------- NAV ---------- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      background: rgba(10,14,23,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      color: var(--cyan);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
+    .status-dot {
+      display: flex; align-items: center; gap: 7px;
+      font-family: var(--mono); font-size: 11px; color: var(--green);
+    }
+    .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+      50%      { opacity: 0.7; box-shadow: 0 0 0 5px rgba(16,185,129,0); }
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 40px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      pointer-events: none;
+    }
+
+    .terminal-tag {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--cyan);
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 span { color: var(--cyan); }
+
+    .hero-role {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--blue);
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-desc {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--cyan);
+      color: #0a0e17;
+      font-weight: 700;
+    }
+    .btn-primary:hover { background: #22d3ee; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+    }
+    .btn-outline:hover { background: rgba(6,182,212,0.1); transform: translateY(-1px); }
+
+    /* ---------- THREAT METER (signature element) ---------- */
+    .threat-panel {
+      position: absolute;
+      right: 40px; bottom: 60px;
+      width: 240px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      font-family: var(--mono);
+    }
+
+    .threat-panel-title {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .threat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .threat-label { color: var(--muted); }
+
+    .threat-bar-wrap {
+      width: 100px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .threat-bar {
+      height: 100%;
+      border-radius: 2px;
+      animation: grow 1.5s ease-out forwards;
+      transform-origin: left;
+    }
+
+    @keyframes grow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    .threat-val { color: var(--text); font-size: 10px; }
+
+    /* ---------- SECTIONS ---------- */
+    section { padding: 80px 40px; max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+    }
+
+    /* ---------- SKILLS ---------- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+
+    .skill-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .skill-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .skill-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ---------- PROJECTS ---------- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+
+    .project-header {
+      padding: 20px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-type {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--blue);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .project-status {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+    .status-active   { background: rgba(16,185,129,0.15); color: var(--green); }
+    .status-progress { background: rgba(245,158,11,0.15); color: var(--yellow); }
+
+    .project-body { padding: 14px 24px 24px; }
+
+    .project-body h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .project-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .project-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-pdf {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 5px 12px;
+      border-radius: 3px;
+      background: transparent;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: all 0.2s;
+      margin-left: auto;
+    }
+    .btn-pdf:hover { background: rgba(6,182,212,0.1); }
+
+    /* ---------- CERTS ---------- */
+    .certs-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: border-color 0.2s;
+    }
+    .cert-card:hover { border-color: var(--green); }
+
+    .cert-badge {
+      width: 40px; height: 40px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .cert-info h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .cert-info p  { font-size: 12px; color: var(--muted); }
+
+    .cert-state {
+      font-family: var(--mono);
+      font-size: 10px;
+      margin-top: 6px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .earned    { background: rgba(16,185,129,0.15); color: var(--green); }
+    .studying  { background: rgba(245,158,11,0.15); color: var(--yellow); }
+    .planned   { background: rgba(100,116,139,0.2); color: var(--muted); }
+
+    /* ---------- LOG TIMELINE ---------- */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px; top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .log-entry { position: relative; margin-bottom: 28px; }
+    .log-entry::before {
+      content: '';
+      position: absolute;
+      left: -24px; top: 5px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      border: 2px solid var(--cyan);
+      background: var(--bg);
+    }
+
+    .log-time {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--cyan);
+      margin-bottom: 4px;
+    }
+
+    .log-entry h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .log-entry p  { font-size: 13px; color: var(--muted); }
+
+    /* ---------- CONTACT ---------- */
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(6,182,212,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-box h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; }
+    .contact-box p  { color: var(--muted); margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto; }
+
+    .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    .contact-link {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ---------- DIVIDER ---------- */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 280px; }
+      .threat-panel { right: 20px; bottom: 20px; width: 200px; }
+      section { padding: 60px 20px; }
+      .contact-box { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">[ SOC_ANALYST ]</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="status-dot"><div class="dot"></div> AVAILABLE FOR HIRE</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="terminal-tag">// blue_team_defender.init()</div>
+  <h1>Muhammad Saad<br/><span>Naseer Chaudhary</span></h1>
+  <div class="hero-role">▸ Cybersecurity Learner &nbsp;|&nbsp; Blue Team Enthusiast &nbsp;|&nbsp; SOC Aspirant</div>
+  <p class="hero-desc">
+    Aspiring SOC Analyst actively building a foundation in cybersecurity through
+    Google's professional certification program on Coursera. Passionate about blue team
+    defense, network security, and Linux — currently working toward my first security role.
+  </p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Hire Me</a>
+  </div>
+
+  <!-- Signature: Live threat panel -->
+  <div class="threat-panel">
+    <div class="threat-panel-title">// skill_proficiency</div>
+    <div class="threat-row">
+      <span class="threat-label">Linux</span>
+      <div class="threat-bar-wrap"><div class="threat-bar" style="width:93%;background:var(--cyan);"></div></div>
+      <span class="threat-val">93%</span>
+    </div>
+    <div class="threat-row">
+      <span class="threat-label">TCP/IP & Networks</span>
+      <div class="threat-bar-wrap"><div class="threat-bar" style="width:91%;background:var(--blue);"></div></div>
+      <span class="threat-val">91%</span>
+    </div>
+    <div class="threat-row">
+      <span class="threat-label">SQL</span>
+      <div class="threat-bar-wrap"><div class="threat-bar" style="width:95%;background:var(--green);"></div></div>
+      <span class="threat-val">95%</span>
+    </div>
+    <div class="threat-row">
+      <span class="threat-label">Security Auditing</span>
+      <div class="threat-bar-wrap"><div class="threat-bar" style="width:90%;background:var(--yellow);"></div></div>
+      <span class="threat-val">90%</span>
+    </div>
+    <div class="threat-row">
+      <span class="threat-label">IP / Networking</span>
+      <div class="threat-bar-wrap"><div class="threat-bar" style="width:92%;background:var(--red);"></div></div>
+      <span class="threat-val">92%</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// core_competencies</div>
+  <h2 class="section-title">Skills & Tools</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-icon">🐧</div>
+      <h3>Linux & Command Line</h3>
+      <p>Navigating and managing Linux systems through the terminal — file permissions, user management, and basic system administration learned via Coursera labs.</p>
+      <div class="skill-tags">
+        <span class="tag">Linux CLI</span>
+        <span class="tag">File Permissions</span>
+        <span class="tag">Bash Basics</span>
+        <span class="tag">User Management</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <h3>TCP/IP & Networking</h3>
+      <p>Understanding how data travels across networks — TCP/IP model, protocols, network communication, and how attackers exploit networking weaknesses.</p>
+      <div class="skill-tags">
+        <span class="tag">TCP/IP</span>
+        <span class="tag">DNS</span>
+        <span class="tag">HTTP/HTTPS</span>
+        <span class="tag">Network Protocols</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🔍</div>
+      <h3>IP Address & Traffic Reading</h3>
+      <p>Reading and analyzing IP addresses, understanding IPv4/IPv6, subnetting basics, and identifying suspicious traffic patterns in network logs.</p>
+      <div class="skill-tags">
+        <span class="tag">IPv4 / IPv6</span>
+        <span class="tag">Subnetting</span>
+        <span class="tag">Traffic Analysis</span>
+        <span class="tag">Log Reading</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <h3>SQL & Data Querying</h3>
+      <p>Writing SQL queries to retrieve, filter, and analyze data — applicable to querying security databases and SIEM log investigation.</p>
+      <div class="skill-tags">
+        <span class="tag">SQL SELECT</span>
+        <span class="tag">Filtering</span>
+        <span class="tag">Joins</span>
+        <span class="tag">Data Analysis</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">📋</div>
+      <h3>Internal Security Auditing</h3>
+      <p>Conducting internal audits to evaluate an organization's security posture — identifying gaps, assessing controls, and producing audit reports.</p>
+      <div class="skill-tags">
+        <span class="tag">Risk Assessment</span>
+        <span class="tag">Controls Review</span>
+        <span class="tag">Audit Reports</span>
+        <span class="tag">NIST CSF</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">📱</div>
+      <h3>Account Security & Recovery</h3>
+      <p>Worked as a Social Media Manager handling Instagram account removal and recovery on client request — developing real-world understanding of account security, identity verification, and access control.</p>
+      <div class="skill-tags">
+        <span class="tag">Account Recovery</span>
+        <span class="tag">Identity Verification</span>
+        <span class="tag">Access Control</span>
+        <span class="tag">Client Communication</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">// lab_projects</div>
+  <h2 class="section-title">Projects & Labs</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-type">SQL Lab</span>
+        <span class="project-status status-active">● Completed</span>
+      </div>
+      <div class="project-body">
+        <h3>Apply Filters to SQL Queries</h3>
+        <p>Investigated real security incidents using SQL on an organization's employees and log_in_attempts tables. Retrieved after-hours failed logins using WHERE, AND & Boolean filters; traced a suspicious event on 2022-05-09 using OR across date ranges; identified logins outside Mexico using NOT and LIKE wildcards; and queried employee machines across Marketing
