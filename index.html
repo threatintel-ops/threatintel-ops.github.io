@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muhammad Saad Naseer Chaudhary | SOC Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#080808;
+  --surface:#111111;
+  --card:#161616;
+  --border:#2a2a2a;
+  --red:#e63946;
+  --red2:#c1121f;
+  --crimson:#8a0000;
+  --white:#f5f5f5;
+  --grey:#888888;
+  --glass:rgba(255,255,255,0.03);
+  --glass-border:rgba(255,255,255,0.08);
+  --glass-hover:rgba(230,57,70,0.06);
+  --bebas:'Bebas Neue',sans-serif;
+  --grotesk:'Space Grotesk',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--grotesk);overflow-x:hidden;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--red);}
+
+/* ── CANVAS PARTICLES ── */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.4;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;transition:padding 0.3s,box-shadow 0.3s;background:var(--black);border-bottom:1px solid var(--border);}
+nav.scrolled{padding:12px 48px;box-shadow:0 8px 32px rgba(0,0,0,0.5);}
+nav.scrolled{padding:12px 48px;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.nav-logo{font-family:var(--bebas);font-size:22px;letter-spacing:0.15em;color:var(--white);}
+.nav-logo span{color:var(--red);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:11px;color:var(--grey);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--red);transition:width 0.3s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{font-family:var(--mono);font-size:11px;padding:9px 20px;border:1px solid var(--red);color:var(--red);text-decoration:none;letter-spacing:0.1em;transition:all 0.2s;}
+.nav-cta:hover{background:var(--red);color:var(--black);}
+.nav-status{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;color:var(--grey);background:rgba(255,255,255,0.03);backdrop-filter:blur(8px);border:1px solid var(--glass-border);padding:6px 12px;}
+.status-pulse{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:statusPulse 2s infinite;}
+@keyframes statusPulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.5);}50%{box-shadow:0 0 0 5px rgba(34,197,94,0);}}
+
+/* ── HERO ── */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;padding:88px 48px 0;overflow:hidden;}
+.hero-bg-text{position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:var(--bebas);font-size:28vw;color:rgba(230,57,70,0.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.02em;}
+.hero-content{position:relative;z-index:2;max-width:900px;}
+.hero-tag{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp 0.8s 0.2s forwards;}
+.hero-name{font-family:var(--bebas);line-height:0.9;margin-bottom:24px;opacity:0;animation:fadeUp 0.8s 0.4s forwards;}
+.hero-name .line1{font-size:clamp(72px,10vw,130px);display:block;letter-spacing:0.02em;}
+.hero-name .line2{font-size:clamp(72px,10vw,130px);display:block;color:var(--red);letter-spacing:0.02em;}
+.hero-slash{color:var(--white);opacity:0.3;}
+.hero-role{font-family:var(--mono);font-size:13px;color:var(--grey);letter-spacing:0.08em;margin-bottom:12px;opacity:0;animation:fadeUp 0.8s 0.6s forwards;}
+.hero-desc{font-size:16px;color:rgba(245,245,245,0.6);line-height:1.7;max-width:520px;margin-bottom:40px;font-weight:300;opacity:0;animation:fadeUp 0.8s 0.8s forwards;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 1s forwards;}
+.btn-primary{font-family:var(--mono);font-size:11px;padding:14px 28px;background:var(--red);color:var(--black);text-decoration:none;letter-spacing:0.12em;font-weight:500;transition:all 0.2s;border:1px solid var(--red);}
+.btn-primary:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(230,57,70,0.3);}
+.btn-outline{font-family:var(--mono);font-size:11px;padding:14px 28px;background:rgba(255,255,255,0.03);backdrop-filter:blur(10px);color:var(--white);text-decoration:none;letter-spacing:0.12em;border:1px solid var(--glass-border);transition:all 0.2s;}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.06);transform:translateY(-2px);}
+.hero-stats{display:flex;gap:48px;margin-top:60px;padding-top:40px;border-top:1px solid var(--border);opacity:0;animation:fadeUp 0.8s 1.2s forwards;}
+.stat-num{font-family:var(--bebas);font-size:48px;color:var(--red);line-height:1;}
+.stat-label{font-family:var(--mono);font-size:10px;color:var(--grey);letter-spacing:0.1em;margin-top:4px;}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:var(--grey);letter-spacing:0.2em;display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeUp 1s 1.5s both;}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--red),transparent);animation:scrollAnim 2s ease-in-out infinite;}
+@keyframes scrollAnim{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(0.5);opacity:0.5}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.left{transform:translateX(-40px);}
+.reveal.right{transform:translateX(40px);}
+.reveal.visible{opacity:1;transform:translate(0);}
+
+/* ── SECTION BASE ── */
+section{position:relative;z-index:1;padding:100px 48px;}
+.section-eyebrow{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px;}
+.section-title{font-family:var(--bebas);font-size:clamp(48px,6vw,80px);line-height:1;margin-bottom:48px;letter-spacing:0.02em;}
+.section-title em{color:var(--red);font-style:normal;}
+.red-line{width:60px;height:3px;background:var(--red);margin-bottom:32px;}
+
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--glass-border);}
+.skill-card{background:var(--glass);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);padding:32px;transition:background 0.3s,transform 0.3s;border:1px solid transparent;}
+.skill-card:hover{background:var(--glass-hover);transform:translateY(-3px);}
+.skill-icon{font-size:28px;margin-bottom:16px;}
+.skill-card h3{font-family:var(--grotesk);font-size:16px;font-weight:600;margin-bottom:10px;}
+.skill-card p{font-size:13px;color:var(--grey);line-height:1.65;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.tag{font-family:var(--mono);font-size:9px;padding:4px 8px;border:1px solid var(--border);color:var(--grey);letter-spacing:0.06em;}
+.skill-bar-wrap{margin-top:16px;}
+.skill-bar-label{font-family:var(--mono);font-size:9px;color:var(--grey);display:flex;justify-content:space-between;margin-bottom:4px;}
+.skill-bar{height:2px;background:var(--border);}
+.skill-bar-fill{height:100%;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 1.2s ease;}
+.skill-card.visible .skill-bar-fill{transform:scaleX(1);}
+
+/* ── PROJECTS ── */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1px;background:var(--glass-border);}
+.project-card{background:var(--glass);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);padding:28px;position:relative;overflow:hidden;transition:background 0.3s,transform 0.3s;}
+.project-card::before{content:'';position:absolute;left:0;top:0;width:3px;height:0;background:var(--red);transition:height 0.4s ease;}
+.project-card:hover{background:var(--glass-hover);transform:translateY(-3px);}
+.project-card:hover::before{height:100%;}
+.project-type{font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;}
+.project-status{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:2px;float:right;}
+.status-done{background:rgba(34,197,94,0.1);color:#22c55e;}
+.status-wip{background:rgba(251,191,36,0.1);color:#fbbf24;}
+.project-card h3{font-size:15px;font-weight:600;margin-bottom:10px;clear:both;}
+.project-card p{font-size:12px;color:var(--grey);line-height:1.65;}
+.project-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;align-items:center;}
+.btn-pdf{font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid var(--red);color:var(--red);text-decoration:none;letter-spacing:0.08em;transition:all 0.2s;margin-left:auto;}
+.btn-pdf:hover{background:var(--red);color:var(--black);}
+
+/* ── CERTS ── */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--glass-border);}
+.cert-card{background:var(--glass);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);padding:24px;display:flex;gap:16px;transition:background 0.3s,transform 0.3s;}
+.cert-card:hover{background:var(--glass-hover);transform:translateY(-3px);}
+.cert-badge{width:44px;height:44px;background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.cert-card h4{font-size:13px;font-weight:600;margin-bottom:4px;}
+.cert-card p{font-size:11px;color:var(--grey);}
+.cert-state{font-family:var(--mono);font-size:9px;margin-top:6px;padding:2px 7px;display:inline-block;}
+.earned{background:rgba(34,197,94,0.1);color:#22c55e;}
+.studying{background:rgba(251,191,36,0.1);color:#fbbf24;}
+.planned{background:rgba(100,100,100,0.2);color:var(--grey);}
+.cert-btn{font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--border);color:var(--grey);text-decoration:none;transition:all 0.2s;display:inline-block;margin-top:6px;margin-left:6px;}
+.cert-btn:hover{border-color:var(--red);color:var(--red);}
+
+/* ── CTF ── */
+.ctf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--glass-border);}
+.ctf-card{background:var(--glass);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);padding:28px;transition:all 0.3s;text-decoration:none;display:block;color:inherit;}
+.ctf-card:hover{background:var(--glass-hover);transform:translateY(-4px);box-shadow:0 12px 40px rgba(230,57,70,0.12);}
+.ctf-card h3{font-size:15px;font-weight:600;margin-bottom:8px;}
+.ctf-card p{font-size:12px;color:var(--grey);line-height:1.65;}
+
+/* ── JOURNEY ── */
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:1px;background:var(--border);}
+.tl-entry{position:relative;margin-bottom:36px;}
+.tl-dot{position:absolute;left:-28px;top:4px;width:10px;height:10px;background:var(--red);border:2px solid var(--black);}
+.tl-time{font-family:var(--mono);font-size:10px;color:var(--red);margin-bottom:4px;letter-spacing:0.1em;}
+.tl-entry h4{font-size:15px;font-weight:600;margin-bottom:4px;}
+.tl-entry p{font-size:13px;color:var(--grey);line-height:1.6;}
+
+/* ── CONTACT ── */
+.contact-inner{border:1px solid var(--glass-border);background:var(--glass);backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);padding:64px;text-align:center;position:relative;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,0.4);}
+.contact-inner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(230,57,70,0.1) 0%,transparent 70%);pointer-events:none;}
+.contact-inner h2{font-family:var(--bebas);font-size:clamp(48px,6vw,80px);margin-bottom:12px;}
+.contact-inner p{color:var(--grey);margin-bottom:36px;max-width:440px;margin-left:auto;margin-right:auto;font-size:14px;}
+.contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.contact-link{font-family:var(--mono);font-size:11px;padding:12px 22px;background:rgba(255,255,255,0.03);backdrop-filter:blur(10px);border:1px solid var(--glass-border);color:var(--white);text-decoration:none;display:flex;align-items:center;gap:8px;transition:all 0.2s;letter-spacing:0.06em;}
+.contact-link:hover{border-color:var(--red);color:var(--red);background:rgba(230,57,70,0.08);}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--grey);}
+footer span{color:var(--red);}
+
+/* ── DIVIDER ── */
+.divider{border:none;border-top:1px solid var(--border);}
+
+.ambient-glow{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:0.5;}
+.glow-1{width:500px;height:500px;background:rgba(230,57,70,0.12);top:10%;left:-10%;}
+.glow-2{width:600px;height:600px;background:rgba(230,57,70,0.08);top:50%;right:-15%;}
+.glow-3{width:450px;height:450px;background:rgba(230,57,70,0.1);bottom:5%;left:20%;}
+.cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(230,57,70,0.06) 0%,transparent 70%);transform:translate(-50%,-50%);transition:left 0.15s,top 0.15s;}
+
+@media(max-width:768px){
+  nav{padding:16px 20px;}
+  .nav-links,.nav-cta{display:none;}
+  .hero,.section{padding-left:20px;padding-right:20px;}
+  .hero{padding-top:76px;}
+  .hero-stats{gap:24px;}
+  .contact-inner{padding:32px 20px;}
+  footer{flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="ambient-glow glow-1"></div>
+<div class="ambient-glow glow-2"></div>
+<div class="ambient-glow glow-3"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">M<span>.</span>S<span>.</span>N<span>.</span>C</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#ctf">CTF</a></li>
+    <li><a href="#journey">Journey</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <div class="nav-status"><div class="status-pulse"></div>OPEN TO WORK</div>
+    <a href="#contact" class="nav-cta">HIRE ME</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-text">SOC</div>
+  <div class="hero-content">
+    <div class="hero-tag">// blue_team_defender.init() — Pakistan 🇵🇰</div>
+    <div class="hero-name">
+      <span class="line1">MUHAMMAD SAAD</span>
+      <span class="line2">NASEER <span class="hero-slash">/</span> CHAUDHARY</span>
+    </div>
+    <div class="hero-role">▸ CYBERSECURITY LEARNER &nbsp;|&nbsp; BLUE TEAM ENTHUSIAST &nbsp;|&nbsp; SOC ASPIRANT</div>
+    <p class="hero-desc">Aspiring SOC Analyst actively building a foundation in cybersecurity through Google's professional certification program on Coursera. Passionate about blue team defense, network security, and Linux — currently working toward my first security role.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">VIEW PROJECTS</a>
+      <a href="#contact" class="btn-outline">GET IN TOUCH</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">11</div><div class="stat-label">DOCUMENTED PROJECTS</div></div>
+      <div><div class="stat-num">4</div><div class="stat-label">CERTIFICATES EARNED</div></div>
+      <div><div class="stat-num">90<span style="font-size:28px">%+</span></div><div class="stat-label">AVERAGE GRADE</div></div>
+      <div><div class="stat-num">2</div><div class="stat-label">MONTHS IN</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="section-eyebrow">// CORE_COMPETENCIES</div>
+    <h2 class="section-title">SKILLS &amp; <em>TOOLS</em></h2>
+  </div>
+  <div class="skills-grid">
+
+    <div class="skill-card reveal left">
+      <div class="skill-icon">🐧</div>
+      <h3>Linux & Command Line</h3>
+      <p>Navigating and managing Linux systems — file permissions, user management, and basic system administration via Coursera labs.</p>
+      <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Proficiency</span><span>93%</span></div><div class="skill-bar"><div class="skill-bar-fill" style="width:93%"></div></div></div>
+      <div class="skill-tags"><span class="tag">Linux CLI</span><span class="tag">chmod</span><span class="tag">Bash Basics</span></div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🌐</div>
+      <h3>TCP/IP & Networking</h3>
+      <p>Understanding how data travels across networks — TCP/IP model, protocols, and how attackers exploit networking weaknesses.</p>
+      <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Proficiency</span><span>91%</span></div><div class="skill-bar"><div class="skill-bar-fill" style="width:91%"></div></div></div>
+      <div class="skill-tags"><span class="tag">TCP/IP</span><span class="tag">DNS</span><span class="tag">HTTP/HTTPS</span></div>
+    </div>
+
+    <div class="skill-card reveal right">
+      <div class="skill-icon">🗄️</div>
+      <h3>SQL & Data Querying</h3>
+      <p>Writing SQL queries to retrieve, filter, and analyze data — applicable to querying security databases and SIEM log investigation.</p>
+      <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Proficiency</span><span>95%</span></div><div class="skill-bar"><div class="skill-bar-fill" style="width:95%"></div></div></div>
+      <div class="skill-tags"><span class="tag">SELECT</span><span class="tag">WHERE/AND/OR</span><span class="tag">LIKE</span></div>
+    </div>
+
+    <div class="skill-card reveal left">
+      <div class="skill-icon">📋</div>
+      <h3>Internal Security Auditing</h3>
+      <p>Conducting internal audits to evaluate security posture — identifying gaps, assessing controls, and producing audit reports.</p>
+      <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Proficiency</span><span>90%</span></div><div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+      <div class="skill-tags"><span class="tag">Risk Assessment</span><span class="tag">NIST CSF</span><span class="tag">Controls</span></div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔍</div>
+      <h3>IP Address & Traffic Reading</h3>
+      <p>Reading and analyzing IP addresses, understanding IPv4/IPv6, subnetting basics, and identifying suspicious traffic patterns.</p>
+      <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Proficiency</span><span>92%</span></div><div class="skill-bar"><div class="skill-bar-fill" style="width:92%"></div></div></div>
+      <div class="skill-tags"><span class="tag">IPv4/IPv6</span><span class="tag">Subnetting</span><span class="tag">Log Reading</span></div>
+    </div>
+
+    <div class="skill-card reveal right">
+      <div class="skill-icon">🛡️</div>
+      <h3>Account Security & Recovery</h3>
+      <p>Platform abuse reporting, content moderation, and account recovery — real-world IAM and access control experience.</p>
+      <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Proficiency</span><span>88%</span></div><div class="skill-bar"><div class="skill-bar-fill" style="width:88%"></div></div></div>
+      <div class="skill-tags"><span class="tag">Identity Mgmt</span><span class="tag">Access Control</span><span class="tag">Abuse Reporting</span></div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-eyebrow">// LAB_PROJECTS</div>
+    <h2 class="section-title">WORK &amp; <em>PROJECTS</em></h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal left">
+      <div class="project-type">SQL LAB <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Apply Filters to SQL Queries</h3>
+      <p>Investigated real security incidents using SQL on an organization's employees and log_in_attempts tables. Retrieved after-hours failed logins, traced suspicious events, identified logins outside Mexico using NOT/LIKE wildcards, and queried employee machines across departments.</p>
+      <div class="project-footer"><span class="tag">SQL</span><span class="tag">MariaDB</span><span class="tag">Log Analysis</span><a href="https://drive.google.com/file/d/11nJXf9D92cElQZKuQf15X8YBiiTjQ9W3/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-type">LINUX LAB <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>File Permissions in Linux</h3>
+      <p>Audited and updated file and directory permissions for a research team's projects directory. Used ls -la to inspect existing permissions including hidden files, interpreted 10-character permission strings, and applied chmod to enforce least privilege.</p>
+      <div class="project-footer"><span class="tag">Linux</span><span class="tag">chmod</span><span class="tag">ls -la</span><a href="https://drive.google.com/file/d/1tQbdNtW1uN1xNnzPXQorp4F7hM5FcURl/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal right">
+      <div class="project-type">RISK MANAGEMENT <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Risk Register — Bank Security Assessment</h3>
+      <p>Completed a risk register for a bank with 100+ employees and 2,000+ customer accounts. Identified and scored 5 key risks using a Likelihood × Severity matrix to determine remediation urgency.</p>
+      <div class="project-footer"><span class="tag">Risk Register</span><span class="tag">Threat Modeling</span><span class="tag">Risk Matrix</span><a href="https://drive.google.com/file/d/1dY-DunM77rsDC7vHT4o3taw5ICYoigQb/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal left">
+      <div class="project-type">ASSET MANAGEMENT <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Home Asset Inventory & Classification</h3>
+      <p>Built a complete asset inventory for a home network — cataloging a router, desktop, guest smartphone, game consoles, streaming devices, and storage. Classified each by sensitivity (Confidential, Restricted, Internal-only).</p>
+      <div class="project-footer"><span class="tag">Asset Inventory</span><span class="tag">Data Classification</span><a href="https://drive.google.com/file/d/1cEA1cF3TnmW-lCWy2wvxacyW_hXFy0WS/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-type">INCIDENT ANALYSIS <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Data Leak Worksheet — Least Privilege Violation</h3>
+      <p>Analyzed a data leak scenario where a sales rep accidentally shared an internal folder publicly. Identified root cause as a least privilege violation, mapped to NIST SP 800-53 AC-6, and recommended role-based access restrictions.</p>
+      <div class="project-footer"><span class="tag">NIST SP 800-53</span><span class="tag">AC-6</span><span class="tag">Least Privilege</span><a href="https://drive.google.com/file/d/1TcqzAOBnwNLH54MLmlPoSBF3BoMexW3h/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal right">
+      <div class="project-type">INCIDENT RESPONSE <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Incident Report Analysis — Applying NIST CSF</h3>
+      <p>Investigated a DoS attack scenario where a malicious actor flooded a company's network with ICMP packets through an unconfigured firewall. Applied all 5 NIST CSF functions to build a full incident report.</p>
+      <div class="project-footer"><span class="tag">NIST CSF</span><span class="tag">DoS Attack</span><span class="tag">ICMP</span><a href="https://drive.google.com/file/d/1n3yf6N1y96iqP5VtOU08giXVkwweJA-0/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal left">
+      <div class="project-type">INTERNAL AUDIT <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Internal Security Audit — Botium Toys</h3>
+      <p>Conducted a full internal security audit for Botium Toys. Defined scope, goals, and stakeholder rights, mapped findings against control categories, and produced a controls and compliance checklist identifying security gaps.</p>
+      <div class="project-footer"><span class="tag">Internal Audit</span><span class="tag">Compliance</span><span class="tag">Controls</span><a href="https://drive.google.com/file/d/1_rKS1fqL5w-xBPRtz7MoqnL3qs84SCiK/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-type">OS HARDENING <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>OS & Network Hardening — Security Risk Assessment</h3>
+      <p>Assessed system vulnerabilities and applied OS and network hardening techniques to reduce the attack surface. Evaluated configurations, identified unnecessary services and open ports, and produced a prioritized risk assessment report.</p>
+      <div class="project-footer"><span class="tag">OS Hardening</span><span class="tag">Attack Surface</span><span class="tag">Risk Assessment</span><a href="https://drive.google.com/file/d/1NrCFSimiTGBLIqdB1T5fuYv6nAQvR92V/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal right">
+      <div class="project-type">ACCESS CONTROL / AAA <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Improving Authentication, Authorization & Accounting</h3>
+      <p>Investigated an unauthorized bank transfer incident at a small business. Reviewed access logs to trace the incident, identified a possible threat actor, pinpointed access control weaknesses, and recommended AAA framework mitigations.</p>
+      <div class="project-footer"><span class="tag">AAA Framework</span><span class="tag">Access Logs</span><span class="tag">Mitigation</span><a href="https://drive.google.com/file/d/11Bv8Te4Y51IyYeAtfJIEoGVcTNmWLszB/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 VIEW PDF</a></div>
+    </div>
+
+    <div class="project-card reveal left">
+      <div class="project-type">REAL WORK EXPERIENCE <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Platform Abuse Reporting & Content Moderation</h3>
+      <p>Worked as a Social Media Manager identifying accounts violating Instagram's Community Standards — including harassment and impersonation — and using platform reporting tools to action malicious accounts. Also assisted clients with account recovery processes.</p>
+      <div class="project-footer"><span class="tag">Abuse Reporting</span><span class="tag">Content Moderation</span><span class="tag">Account Recovery</span><a href="https://youtu.be/D3go2WE8DN4?si=WWAz4yOoY_8hnDtl" target="_blank" class="btn-pdf">▶ DEMO</a></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-type">RISK ASSESSMENT <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Vulnerability Assessment — Exposed Database Server</h3>
+      <p>Assessed a fictional e-commerce company's remote MySQL database server, publicly accessible for 3 years. Applied NIST SP 800-30 Rev. 1 methodology to score threat likelihood and severity (hacker exfiltration, insider disruption, customer tampering), then recommended a Zero Trust remediation strategy with RBAC and TLS encryption.</p>
+      <div class="project-footer"><span class="tag">NIST SP 800-30</span><span class="tag">Zero Trust</span><span class="tag">RBAC</span><a href="https://drive.google.com/file/d/1U14Beb_i_yjEn1SyaJ7pzpiQJrbQX3pA/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 SCENARIO</a><a href="https://drive.google.com/file/d/1EPit2u394sQejhf4qg5STv0HYIEeiof9/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 NIST SP-800-30</a><a href="https://drive.google.com/file/d/1U7nm_b_9yE2458bjbIsCITr1dHB3-R1R/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 REPORT</a></div>
+    </div>
+
+    <div class="project-card reveal right">
+      <div class="project-type">SOCIAL ENGINEERING <span class="project-status status-done">● COMPLETED</span></div>
+      <h3>Parking Lot USB Exercise</h3>
+      <p>Analyzed a simulated incident at Rhetorical Hospital where an employee's USB drive was found unattended in a parking lot. Safely investigated the drive's contents via virtualization, then assessed how exposed PII and internal documents could enable targeted social engineering — recommending managerial, operational, and technical mitigations.</p>
+      <div class="project-footer"><span class="tag">Social Engineering</span><span class="tag">Virtualization</span><span class="tag">Physical Security</span><a href="https://drive.google.com/file/d/1G6LoEUxo1ES-h5qnspqKMW-fxmvff4Iu/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 SCENARIO</a><a href="https://drive.google.com/file/d/1PyTfZh-qEhpVYH9cFSXHT5qiccVKJzFY/view?usp=drivesdk" target="_blank" class="btn-pdf">📄 EXERCISE</a></div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="reveal">
+    <div class="section-eyebrow">// CERTIFICATIONS</div>
+    <h2 class="section-title">EARNED &amp; <em>PLANNED</em></h2>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card reveal left">
+      <div class="cert-badge">🏅</div>
+      <div><h4>Foundations of Cybersecurity</h4><p>Google / Coursera</p><span class="cert-state earned">✓ EARNED</span><a href="https://drive.google.com/file/d/1N6jFxOnRhHxCY9Bf0GmGMyV47pcwN6NX/view?usp=drivesd" target="_blank" class="cert-btn">VIEW</a></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge">🏅</div>
+      <div><h4>Connect and Protect: Networks & Security</h4><p>Google / Coursera</p><span class="cert-state earned">✓ EARNED</span><a href="https://drive.google.com/file/d/1V66VQEGPR6Mh9A5ojeyf8bY_itrCYwkN/view?usp=drivesdk" target="_blank" class="cert-btn">VIEW</a></div>
+    </div>
+    <div class="cert-card reveal right">
+      <div class="cert-badge">🏅</div>
+      <div><h4>Play It Safe: Manage Security Risks</h4><p>Google / Coursera</p><span class="cert-state earned">✓ EARNED</span><a href="https://drive.google.com/file/d/1wSu4NIMo_d6vGzY89gJxPYhYfgjj7ieW/view?usp=drivesdk" target="_blank" class="cert-btn">VIEW</a></div>
+    </div>
+    <div class="cert-card reveal left">
+      <div class="cert-badge">🏅</div>
+      <div><h4>Tools of the Trade: Linux & SQL</h4><p>Google / Coursera</p><span class="cert-state earned">✓ EARNED</span><a href="https://drive.google.com/file/d/1wfPLrdK5vsOIfB-srmOlWgo4jWEwNbZ2/view?usp=drivesdk" target="_blank" class="cert-btn">VIEW</a></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge">📚</div>
+      <div><h4>Google Cybersecurity Certificate</h4><p>Google / Coursera — Full Program</p><span class="cert-state studying">⟳ IN PROGRESS</span></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge">🔮</div>
+      <div><h4>CompTIA Security+</h4><p>CompTIA</p><span class="cert-state planned">→ PLANNED</span></div>
+    </div>
+    <div class="cert-card reveal left">
+      <div class="cert-badge">🚩</div>
+      <div><h4>Hacker Holidays</h4><p>TryHackMe · Cert ID: THM-L5ZXT9NYG4</p><span class="cert-state earned">✓ EARNED — 12 AUG 2026</span><a href="https://drive.google.com/file/d/1SHLWHTCGqi-qdCcw5HEZHL7kaj5FYDAZ/view?usp=drivesdk" target="_blank" class="cert-btn">VIEW</a></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CTF -->
+<section id="ctf">
+  <div class="reveal">
+    <div class="section-eyebrow">// OFFENSIVE_PRACTICE</div>
+    <h2 class="section-title">CTF &amp; <em>BUG BOUNTY</em></h2>
+    <p style="color:var(--grey);font-size:14px;max-width:560px;margin-bottom:40px;margin-top:-24px;">Practicing offensive security concepts in legal, controlled environments to better understand how attackers think — sharpening blue team defense skills.</p>
+  </div>
+  <div class="ctf-grid">
+    <a href="https://tryhackme.com/p/wrzoa" target="_blank" class="ctf-card reveal left">
+      <div class="project-type" style="margin-bottom:10px;">🚩 TRYHACKME — wrzoa [0x9][MAGE]</div>
+      <h3>Top 6% Global Rank · 70 Rooms Completed</h3>
+      <p>Actively climbing TryHackMe — 70 rooms completed, 12 badges earned, and a 21-day streak. Working through authentication bypass, session hijacking, and the OWASP Top 10.</p>
+      <div class="skill-tags" style="margin-top:14px;"><span class="tag">TOP 6%</span><span class="tag">70 ROOMS</span><span class="tag">12 BADGES</span><span class="tag">21-DAY STREAK</span></div>
+    </a>
+    <div class="ctf-card reveal">
+      <div class="project-type" style="margin-bottom:10px;">📦 HACKTHEBOX</div>
+      <h3>Coming Soon</h3>
+      <p>Tackling real-world style vulnerable machines — enumeration, exploitation, and privilege escalation in legal lab environments.</p>
+      <div class="skill-tags" style="margin-top:14px;"><span class="tag">ENUMERATION</span><span class="tag">EXPLOITATION</span><span class="tag">PRIV ESC</span></div>
+    </div>
+    <div class="ctf-card reveal right">
+      <div class="project-type" style="margin-bottom:10px;">🐛 BUG BOUNTY</div>
+      <h3>HackerOne / Bugcrowd</h3>
+      <p>Exploring ethical vulnerability disclosure — learning to identify and responsibly report security flaws like account takeover issues.</p>
+      <div class="skill-tags" style="margin-top:14px;"><span class="tag">VULN DISCLOSURE</span><span class="tag">ATO</span><span class="tag">RESPONSIBLE</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="reveal">
+    <div class="section-eyebrow">// ACTIVITY_LOG</div>
+    <h2 class="section-title">MY <em>JOURNEY</em></h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-entry reveal left">
+      <div class="tl-dot"></div>
+      <div class="tl-time">APR 2026 › START</div>
+      <h4>Discovered Cybersecurity</h4>
+      <p>Became interested in cybersecurity and decided to take it seriously — started the Google Cybersecurity Certificate program on Coursera.</p>
+    </div>
+    <div class="tl-entry reveal left">
+      <div class="tl-dot"></div>
+      <div class="tl-time">APR 2026 › MILESTONE</div>
+      <h4>Foundations of Cybersecurity — Completed</h4>
+      <p>Earned first certificate — learned core security concepts, the CIA triad, types of threats, and the role of a security analyst.</p>
+    </div>
+    <div class="tl-entry reveal left">
+      <div class="tl-dot"></div>
+      <div class="tl-time">MAY 2026 › MILESTONE</div>
+      <h4>Networking, TCP/IP & Tools of the Trade — Completed</h4>
+      <p>Studied how networks operate, TCP/IP model, IP addressing, DNS, HTTP, Linux CLI, and SQL — earning 3 certificates back to back.</p>
+    </div>
+    <div class="tl-entry reveal left">
+      <div class="tl-dot"></div>
+      <div class="tl-time">MAY 2026 › MILESTONE</div>
+      <h4>Managing Security Risks — Completed</h4>
+      <p>Learned risk management frameworks, NIST CSF, internal auditing, and how organizations assess and manage security threats.</p>
+    </div>
+    <div class="tl-entry reveal left">
+      <div class="tl-dot"></div>
+      <div class="tl-time">JUN 2026 — NOW › ACTIVE</div>
+      <h4>Building Portfolio & Continuing Google Program</h4>
+      <p>Actively documenting real lab work, building this portfolio, joining TryHackMe, and completing remaining Google Cybersecurity courses — all within just 2 months of starting. 🚀</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-eyebrow">// OPEN_TO_WORK</div>
+    <div class="contact-inner">
+      <h2>LET'S <em style="color:var(--red);font-style:normal;">CONNECT</em></h2>
+      <p>Looking for a Junior SOC Analyst or Blue Team role. Open to internships, entry-level positions, and apprenticeships.</p>
+      <div class="contact-links">
+        <a href="mailto:thrintelsoc@gmail.com" class="contact-link">✉ EMAIL ME</a>
+        <a href="https://linkedin.com" target="_blank" class="contact-link">in LINKEDIN</a>
+        <a href="https://github.com/threatintel-ops" target="_blank" class="contact-link">⌥ GITHUB</a>
+        <a href="https://tryhackme.com/p/wrzoa" target="_blank" class="contact-link">🎯 TRYHACKME</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>MUHAMMAD SAAD NASEER CHAUDHARY</span>
+  <div>// role: SOC_ANALYST_ASPIRANT &nbsp;|&nbsp; status: <span>OPEN_TO_WORK</span> &nbsp;|&nbsp; built: 2026</div>
+</footer>
+
+<script>
+// CURSOR GLOW
+const glow=document.getElementById('cursorGlow');
+document.addEventListener('mousemove',e=>{
+  glow.style.left=e.clientX+'px';
+  glow.style.top=e.clientY+'px';
+});
+
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+});
+
+// PARTICLES
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+const particles=Array.from({length:60},()=>({
+  x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+  vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,
+  size:Math.random()*1.5+0.5,
+  opacity:Math.random()*0.5+0.1
+}));
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width) p.vx*=-1;
+    if(p.y<0||p.y>canvas.height) p.vy*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle=`rgba(230,57,70,${p.opacity})`;
+    ctx.fill();
+  });
+  // connect nearby
+  particles.forEach((a,i)=>{
+    particles.slice(i+1).forEach(b=>{
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<100){
+        ctx.beginPath();
+        ctx.moveTo(a.x,a.y);
+        ctx.lineTo(b.x,b.y);
+        ctx.strokeStyle=`rgba(230,57,70,${0.08*(1-d/100)})`;
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// SCROLL REVEAL
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      // Skill bars
+      const fill=entry.target.querySelector('.skill-bar-fill');
+      if(fill) entry.target.classList.add('visible');
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+reveals.forEach(r=>observer.observe(r));
+
+// SKILL BAR OBSERVER
+const skillCards=document.querySelectorAll('.skill-card');
+const skillObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add('visible');
+  });
+},{threshold:0.3});
+skillCards.forEach(c=>skillObserver.observe(c));
+
+// STAT COUNTER ANIMATION
+function animateCounter(el,target){
+  let current=0;
+  const step=target/40;
+  const timer=setInterval(()=>{
+    current+=step;
+    if(current>=target){current=target;clearInterval(timer);}
+    el.textContent=Math.floor(current)+(el.dataset.suffix||'');
+  },40);
+}
+const statNums=document.querySelectorAll('.stat-num');
+const statObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const text=entry.target.textContent;
+      const num=parseInt(text);
+      if(!isNaN(num)) animateCounter(entry.target,num);
+      statObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:0.5});
+statNums.forEach(s=>statObserver.observe(s));
+</script>
+</body>
+</html>
